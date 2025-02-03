@@ -12,6 +12,6 @@ int main()
 	Engine engine;
     engine.SetTargetFrameRate(20);
     engine.SetCursorType(CursorType::NoCursor);
-	engine.LoadLevel(new ScoreLevel(2000, 2000000000));
+	engine.LoadLevel(new GameLevel());
 	engine.Run();
 }

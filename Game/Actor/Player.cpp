@@ -38,10 +38,32 @@ Player::Player(GameLevel* level)
 	slideClip->SetLoop(true);
 	level->AddActor(slideClip);
 
+	ImageText* die02 = new ImageText("Character/Cookie_Die_02", Color::Yellow);
+	ImageText* die03 = new ImageText("Character/Cookie_Die_03", Color::Yellow);
+	ImageText* die04 = new ImageText("Character/Cookie_Die_04", Color::Yellow);
+
+	AnimationClip* dieClip = new AnimationClip(die, 0.25f);
+	dieClip->SetPlayPosition(defaultPosition);
+	dieClip->AddImage(new ImageText("Character/Cookie_Die_01", Color::Yellow), 0.0f);
+	dieClip->AddImage(die02, 0.3f);
+	dieClip->AddImage(die03, 0.6f);
+	dieClip->AddImage(die04, 0.9f);
+	dieClip->SetLoop(false);
+	level->AddActor(dieClip);
+
+	Vector2 diePosition = defaultPosition;
+	diePosition.y += 20;
+	die02->SetDrawingPosition(diePosition);
+	diePosition.y -= 5;
+	die03->SetDrawingPosition(diePosition);
+	diePosition.y += 20;
+	die04->SetDrawingPosition(diePosition);
+
 	playerAnimator.AddClip(moveClip);
 	playerAnimator.AddClip(jumpClip);
 	playerAnimator.AddClip(doubleJumpClip);
 	playerAnimator.AddClip(slideClip);
+	playerAnimator.AddClip(dieClip);
 
 	SetState(PlayerState::Move);
 
@@ -62,6 +84,12 @@ void Player::Update(float deltaTime)
 	else if (state == PlayerState::DoubleJump)
 	{
 		Jump(deltaTime);
+	}
+	else if (state == PlayerState::Die)
+	{
+		dieTime -= deltaTime;
+		if (dieTime < 0)
+			level->LoadScoreLevel();
 	}
 	else
 	{
@@ -87,13 +115,18 @@ void Player::Draw()
 
 void Player::LateUpdate(float deltaTime)
 {
+	if (state == PlayerState::Die)
+		return;
+
 	if (!isBig)
 	{
 		collisionObject = OnCollisionObject(CreateMap::Get().GetActiveObjectList());
 		if (collisionObject)
 		{
-			level->LoadScoreLevel();
+			//level->LoadScoreLevel();
 			//Engine::Get().QuitGame();
+
+			SetState(PlayerState::Die);
 
 			return;
 		}
@@ -123,6 +156,11 @@ void Player::SetState(PlayerState state)
 	switch (state)
 	{
 		case Player::PlayerState::Idle:
+			break;
+
+		case Player::PlayerState::Die:
+			playerAnimator.Play(die);
+			CreateMap::Get().Off();
 			break;
 
 		case Player::PlayerState::Move:

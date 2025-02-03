@@ -61,6 +61,8 @@ public:
 	// 활성화 오브젝트 리스트 Getter.
 	std::vector<MapObject*> GetActiveObjectList() { return activeObjectList; }
 
+	void Off() { isOn = false; }
+
 private:
 	// 싱글톤 구현을 위한 전역 변수 선언.
 	static CreateMap* instance;
@@ -89,4 +91,6 @@ private:
 
 	int mapIndex = 0;
 	int prevMapIndex = 0;
+
+	bool isOn = false;
 };

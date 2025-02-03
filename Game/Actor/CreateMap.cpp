@@ -42,6 +42,8 @@ CreateMap::CreateMap(Level* level)
 	LoadItem("Item/Cookie_BearJelly", ItemType::BearJelly);
 	LoadItem("Item/Cookie_KingBearJelly", ItemType::KingBearJelly);
 	LoadItem("Item/Cookie_Big", ItemType::Big);
+
+	isOn = true;
 }
 
 CreateMap::~CreateMap()
@@ -74,6 +76,9 @@ CreateMap& CreateMap::Get()
 
 void CreateMap::Update(float deltaTime)
 {
+	if (!isOn)
+		return;
+
 	MapObject::SetFloorMoveX(deltaTime);
 }
 

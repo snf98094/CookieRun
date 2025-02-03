@@ -14,7 +14,8 @@ class Player : public Actor
 		Move,
 		Jump,
 		DoubleJump,
-		Slide
+		Slide,
+		Die
 	};
 
 public:
@@ -49,6 +50,7 @@ private:
 	const char* jump = "Jump";
 	const char* doubleJump = "DoubleJump";
 	const char* slide = "Slide";
+	const char* die = "Die";
 	AnimationClip* animationClip = nullptr;
 
 	// 점프 위치를 적용시켜줄 변수.
@@ -67,6 +69,9 @@ private:
 	bool isBig = false;
 	// 거대화 시간.
 	float bigTime = 0.0f;
+
+	// 패배 시 대기 시간.
+	float dieTime = 2.0f;
 
 	// 플레이 중 획특한 코인.
 	int coin = 0;
