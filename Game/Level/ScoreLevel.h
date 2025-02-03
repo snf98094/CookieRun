@@ -13,6 +13,9 @@ public:
     virtual void Update(float deltaTime) override;
     virtual void Draw() override;
 
+    void MouseInputInit();
+    void MouseInputCheck();
+
 private:
     ImageText* scorePanel01 = nullptr;
     ImageText* scorePanel02 = nullptr;
@@ -23,4 +26,9 @@ private:
     NumberText* coinText = nullptr;
 
     NumberText* scoreText = nullptr;
+
+    HANDLE hInput;
+    DWORD prevMode;
+    INPUT_RECORD inputRecord;
+    DWORD events;
 };

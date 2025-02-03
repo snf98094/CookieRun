@@ -13,6 +13,9 @@ public:
 	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;
 
+	void MouseInputInit();
+	void MouseInputCheck();
+
 private:
 	ImageText* image01;
 	ImageText* image02;

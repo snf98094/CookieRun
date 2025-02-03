@@ -1,5 +1,6 @@
 #include "ScoreLevel.h"
 #include "Engine/Engine.h"
+#include "Level/LoadingLevel.h"
 
 ScoreLevel::ScoreLevel(int coin, int score)
 {
@@ -35,10 +36,13 @@ ScoreLevel::ScoreLevel(int coin, int score)
 	scoreText->SetPosition(Vector2(Engine::Get().ScreenSize().x / 2 - 56, 170));
 	scoreText->SetNumber(score);
 	actors.push_back(scoreText);
+
+	MouseInputInit();
 }
 
 void ScoreLevel::Update(float deltaTime)
 {
+	MouseInputCheck();
 }
 
 void ScoreLevel::Draw()
@@ -51,4 +55,44 @@ void ScoreLevel::Draw()
 	scoreButton->Print();
 
 	coinIcon->Print();
+}
+
+void ScoreLevel::MouseInputInit()
+{
+	hInput = GetStdHandle(STD_INPUT_HANDLE);
+	if (hInput == INVALID_HANDLE_VALUE)
+		return;
+
+	// 콘솔 입력 모드 설정
+	GetConsoleMode(hInput, &prevMode);
+	SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
+}
+
+void ScoreLevel::MouseInputCheck()
+{
+
+	// 입력 이벤트 읽기
+	ReadConsoleInput(hInput, &inputRecord, 1, &events);
+
+	// 마우스 이벤트인지 확인
+	if (inputRecord.EventType == MOUSE_EVENT)
+	{
+		if (inputRecord.Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED)
+		{
+			Vector2 buttonPosition = *scoreButton->GetDrawingPosition();
+			Vector2 buttonSize = scoreButton->GetSize();
+			
+			bool checkX, checkY;
+			int x = inputRecord.Event.MouseEvent.dwMousePosition.X;
+			int y = inputRecord.Event.MouseEvent.dwMousePosition.Y;
+			checkX = x >= buttonPosition.x && x <= buttonPosition.x + buttonSize.x;
+			checkY = y >= buttonPosition.y && y <= buttonPosition.y + buttonSize.y;
+
+			if (checkX && checkY)
+			{
+				Engine::Get().LoadLevel(new LoadingLevel());
+				SetConsoleMode(hInput, prevMode);
+			}
+		}
+	}
 }

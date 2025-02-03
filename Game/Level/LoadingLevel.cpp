@@ -21,13 +21,7 @@ LoadingLevel::LoadingLevel()
 	image08 = new ImageText("Loading/Cookie_Loading_08", Color::White, false);
 	image08->SetDrawingPosition(Vector2(x * 7, 0));
 
-	hInput = GetStdHandle(STD_INPUT_HANDLE);
-	if (hInput == INVALID_HANDLE_VALUE)
-		return;
-
-	// 콘솔 입력 모드 설정
-	GetConsoleMode(hInput, &prevMode);
-	SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
+	MouseInputInit();
 }
 
 LoadingLevel::~LoadingLevel()
@@ -44,15 +38,7 @@ LoadingLevel::~LoadingLevel()
 
 void LoadingLevel::Update(float deltaTime)
 {
-	// 입력 이벤트 읽기
-	ReadConsoleInput(hInput, &inputRecord, 1, &events);
-
-	// 마우스 이벤트인지 확인
-	if (inputRecord.EventType == MOUSE_EVENT)
-	{
-		if (inputRecord.Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED)
-			Engine::Get().LoadLevel(new GameLevel());
-	}
+	MouseInputCheck();
 }
 
 void LoadingLevel::Draw()
@@ -65,4 +51,31 @@ void LoadingLevel::Draw()
 	image06->Print();
 	image07->Print();
 	image08->Print();
+}
+
+void LoadingLevel::MouseInputInit()
+{
+	hInput = GetStdHandle(STD_INPUT_HANDLE);
+	if (hInput == INVALID_HANDLE_VALUE)
+		return;
+
+	// 콘솔 입력 모드 설정
+	GetConsoleMode(hInput, &prevMode);
+	SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
+}
+
+void LoadingLevel::MouseInputCheck()
+{
+	// 입력 이벤트 읽기
+	ReadConsoleInput(hInput, &inputRecord, 1, &events);
+
+	// 마우스 이벤트인지 확인
+	if (inputRecord.EventType == MOUSE_EVENT)
+	{
+		if (inputRecord.Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED)
+		{
+			Engine::Get().LoadLevel(new GameLevel());
+			SetConsoleMode(hInput, prevMode);
+		}
+	}
 }
