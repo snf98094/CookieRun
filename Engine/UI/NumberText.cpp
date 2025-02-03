@@ -16,9 +16,9 @@ NumberText::NumberText(TextSizeType sizeType) : sizeType(sizeType)
 
 	numberList.push_back(std::vector<ImageText>());
 	for (int i = 0; i < 10; i++)
-		numberList[0].push_back(new ImageText(numbers[i]));
+		numberList[0].push_back(ImageText(numbers[i]));
 
-	comma = new ImageText(sizeType == TextSizeType::Normal ? "Number/Cookie_Comma" : "Number/Large/Cookie_Comma");
+	//comma = new ImageText(sizeType == TextSizeType::Normal ? "Number/Cookie_Comma" : "Number/Large/Cookie_Comma");
 	comma = new ImageText("Number/Cookie_Comma");
 
 	textInterval = sizeType == TextSizeType::Normal ? 16 : 24;
@@ -28,6 +28,17 @@ NumberText::NumberText(TextSizeType sizeType) : sizeType(sizeType)
 
 NumberText::~NumberText()
 {
+	for (int i = 0; i < 10; i++)
+		delete numbers[i];
+
+	for (int i = 0; i < numberList.size(); i++)
+		numberList[i].clear();
+	numberList.clear();
+
+	delete comma;
+
+	commaList.clear();
+
 	delete[] number;
 }
 

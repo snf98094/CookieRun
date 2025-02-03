@@ -40,6 +40,14 @@ ScoreLevel::ScoreLevel(int coin, int score)
 	MouseInputInit();
 }
 
+ScoreLevel::~ScoreLevel()
+{
+	delete scorePanel01;
+	delete scorePanel02;
+	delete scoreButton;
+	delete coinIcon;
+}
+
 void ScoreLevel::Update(float deltaTime)
 {
 	MouseInputCheck();

@@ -270,6 +270,9 @@ void Engine::Update(float deltaTime)
 	// 레벨 업데이트.
 	if (mainLevel != nullptr)
 		mainLevel->Update(deltaTime);
+
+	if (Engine::Get().GetKeyDown(VK_ESCAPE))
+		Engine::Get().QuitGame();
 }
 
 void Engine::LateUpdate(float deltaTime)

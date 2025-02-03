@@ -9,6 +9,7 @@ class ScoreLevel : public Level
 
 public:
     ScoreLevel(int coin, int score);
+    ~ScoreLevel();
 
     virtual void Update(float deltaTime) override;
     virtual void Draw() override;

@@ -8,10 +8,10 @@
 int main()
 {
 	CheckMemoryLeak();
-
+	//_CrtSetBreakAlloc(15124);
 	Engine engine;
     engine.SetTargetFrameRate(20);
     engine.SetCursorType(CursorType::NoCursor);
-	engine.LoadLevel(new ScoreLevel(0, 0));
+	engine.LoadLevel(new LoadingLevel());
 	engine.Run();
 }

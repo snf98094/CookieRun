@@ -26,12 +26,9 @@ GameLevel::GameLevel()
 	actors.push_back(scoreText);
 }
 
-void GameLevel::Update(float deltaTime)
+GameLevel::~GameLevel()
 {
-	Super::Update(deltaTime);
-
-	if (Engine::Get().GetKeyDown(VK_ESCAPE))
-		Engine::Get().QuitGame();
+	delete coinIcon;
 }
 
 void GameLevel::Draw()
