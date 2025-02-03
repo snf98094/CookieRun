@@ -29,6 +29,8 @@ GameLevel::GameLevel()
 GameLevel::~GameLevel()
 {
 	delete coinIcon;
+
+	MapObject::InitStatic();
 }
 
 void GameLevel::Draw()

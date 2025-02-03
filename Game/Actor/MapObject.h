@@ -32,6 +32,7 @@ public:
 	void SetStartPosition(int positionX);
 	
 	static void SetFloorMoveX(float deltaTime);
+	static void InitStatic();
 
 	// 객체별 이미지 텍스트 Getter.
 	ImageText* GetImage() { return image; }

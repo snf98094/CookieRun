@@ -101,3 +101,9 @@ void MapObject::SetFloorMoveX(float deltaTime)
 {
 	floorMoveX -= moveSpeed * deltaTime;
 }
+
+void MapObject::InitStatic()
+{
+	floorMoveX = 0;
+	floorIndex = 10;
+}

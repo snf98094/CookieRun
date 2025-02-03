@@ -56,6 +56,7 @@ CreateMap::~CreateMap()
 
 			delete objects;
 		}
+	objectList->clear();
 
 	for (std::vector<Item*>* items : itemList)
 	{
@@ -64,9 +65,14 @@ CreateMap::~CreateMap()
 
 		delete items;
 	}
+	itemList.clear();
 
 	for (MapDB* db : mapDBList)
 		delete db;
+	mapDBList.clear();
+
+	activeItemList.clear();
+	activeObjectList.clear();
 }
 
 CreateMap& CreateMap::Get()

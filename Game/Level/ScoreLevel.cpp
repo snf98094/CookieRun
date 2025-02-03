@@ -1,6 +1,6 @@
 #include "ScoreLevel.h"
 #include "Engine/Engine.h"
-#include "Level/LoadingLevel.h"
+#include "Level/GameLevel.h"
 
 ScoreLevel::ScoreLevel(int coin, int score)
 {
@@ -98,7 +98,7 @@ void ScoreLevel::MouseInputCheck()
 
 			if (checkX && checkY)
 			{
-				Engine::Get().LoadLevel(new LoadingLevel());
+				Engine::Get().LoadLevel(new GameLevel());
 				SetConsoleMode(hInput, prevMode);
 			}
 		}
