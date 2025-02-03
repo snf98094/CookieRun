@@ -16,7 +16,7 @@ enum class TextSortType
 	Right
 };
 
-class NumberText : public Actor
+class ENGINE_API NumberText : public Actor
 {
 	RTTI_DECLARATIONS(NumberText, Actor)
 

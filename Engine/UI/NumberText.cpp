@@ -1,3 +1,4 @@
+#include "PreCompiledHeader.h"
 #include "NumberText.h"
 
 NumberText::NumberText(TextSizeType sizeType) : sizeType(sizeType)

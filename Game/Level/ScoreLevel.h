@@ -1,7 +1,7 @@
 #pragma once
 #include "Level/Level.h"
 #include "Image/ImageText.h"
-#include "Actor/NumberText.h"
+#include "UI/NumberText.h"
 
 class ScoreLevel : public Level
 {

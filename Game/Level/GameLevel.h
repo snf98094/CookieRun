@@ -2,7 +2,7 @@
 #include "Level/Level.h"
 #include "Actor/Player.h"
 #include "Actor/CreateMap.h"
-#include "Actor/NumberText.h"
+#include "UI/NumberText.h"
 #include "Image/ImageText.h"
 
 class GameLevel : public Level

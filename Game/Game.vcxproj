@@ -182,7 +182,6 @@
     <ClCompile Include="Actor\CreateMap.cpp" />
     <ClCompile Include="Actor\Item.cpp" />
     <ClCompile Include="Actor\MapObject.cpp" />
-    <ClCompile Include="Actor\NumberText.cpp" />
     <ClCompile Include="Actor\Player.cpp" />
     <ClCompile Include="Level\GameLevel.cpp" />
     <ClCompile Include="Level\LoadingLevel.cpp" />
@@ -192,7 +191,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\CreateMap.h" />
-    <ClInclude Include="Actor\NumberText.h" />
     <ClInclude Include="Actor\Item.h" />
     <ClInclude Include="Game\MapDB.h" />
     <ClInclude Include="Actor\MapObject.h" />
