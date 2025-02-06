@@ -82,6 +82,14 @@ void Level::Draw()
 {
 	//ClearConsole();
 
+	for (Actor* actor : actors)
+	{
+		if (!actor->isActive || actor->isExpired)
+			continue;
+
+		actor->BackgroundDraw();
+	}
+
 	// 레벨에 포함된 액터를 순회하면서 Draw 함수 호출.
 	for (Actor* actor : actors)
 	{
@@ -89,7 +97,6 @@ void Level::Draw()
 		if (!actor->isActive || actor->isExpired)
 			continue;
 
-		actor->BackgroundDraw();
 		actor->Draw();
 	}
 }
