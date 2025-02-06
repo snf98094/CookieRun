@@ -20,6 +20,7 @@ public:
 
 	// 루프 처리 함수.
 	virtual void Update(float delatTime);
+	virtual void BackgroundDraw();
 	virtual void Draw();
 	virtual void LateUpdate(float delatTime);
 

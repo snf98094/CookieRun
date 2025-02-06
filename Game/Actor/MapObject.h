@@ -15,7 +15,7 @@ public:
 	~MapObject();
 
 	virtual void Update(float deltaTime) override;
-	virtual void Draw() override;
+	virtual void BackgroundDraw() override;
 
 	// √ ±‚»≠.
 	void Init();

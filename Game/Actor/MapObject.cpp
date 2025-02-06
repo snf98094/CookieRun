@@ -42,7 +42,7 @@ void MapObject::Update(float deltaTime)
 	CheckPosition(deltaTime);
 }
 
-void MapObject::Draw()
+void MapObject::BackgroundDraw()
 {
 	image->Print();
 }

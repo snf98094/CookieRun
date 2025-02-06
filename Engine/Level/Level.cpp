@@ -89,6 +89,7 @@ void Level::Draw()
 		if (!actor->isActive || actor->isExpired)
 			continue;
 
+		actor->BackgroundDraw();
 		actor->Draw();
 	}
 }

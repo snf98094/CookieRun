@@ -16,6 +16,10 @@ void Actor::Update(float delatTime)
 {
 }
 
+void Actor::BackgroundDraw()
+{
+}
+
 void Actor::Draw()
 {
 }
